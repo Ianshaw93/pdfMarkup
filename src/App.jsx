@@ -28,9 +28,15 @@ function App() {
       </label>
 
     </div>
-    { previewImage ? <> <img src={previewImage}></img>
-    </> : <div> Please upload image </div>}
-      <Canvas />
+    <div>
+      { previewImage ? (<div className='pointer-events-none'> 
+      <img 
+      src={previewImage}
+      className='inset-0 absolute z-0 pointer-events-none user-drag-none'
+      />
+      </div>) : <div> Please upload image </div>}
+        <Canvas />
+    </div>
     </>
   )
 }

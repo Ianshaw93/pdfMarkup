@@ -29,13 +29,19 @@ function App() {
 
     </div>
     <div>
-      { previewImage ? (<div className='pointer-events-none'> 
-      <img 
-      src={previewImage}
-      className='inset-0 absolute z-0 pointer-events-none user-drag-none'
-      />
-      </div>) : <div> Please upload image </div>}
-        <Canvas />
+      { previewImage ? (<>
+        <div className='pointer-events-none'> 
+        {/* unclear why height of img is not changed */}
+        <img 
+        src={previewImage}
+        className='inset-0 absolute z-0 pointer-events-none user-drag-none'
+        height={window.innerHeight}
+        width={window.innerWidth}
+        />
+        </div>
+        <Canvas tool={"polyline"}/>
+      </>
+      ) : <div> Please upload image </div>}
     </div>
     </>
   )

@@ -1,11 +1,14 @@
 import './App.css'
 import Canvas from './Components/Canvas'
 import { useRef, useState } from 'react'
+import * as pdfjs from 'pdfjs-dist/build/pdf';
 
-const pdfjs = await import('pdfjs-dist/build/pdf');
-const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker', import.meta.url);
 
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+// const pdfjs = await import('pdfjs-dist/build/pdf');
+// const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+
+// pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 
 
 

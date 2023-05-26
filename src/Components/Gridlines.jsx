@@ -2,8 +2,11 @@ import { useEffect, useRef } from 'react'
 
 // TODO: send in 
 // eslint-disable-next-line react/prop-types
-function Gridlines({pixelsPerMesh}) {
+function Gridlines({pixelsPerMesh, dimensions}) {
+    console.log(dimensions, "grid")
     const canvasRef = useRef(null)
+    const canvasWidth = dimensions.width
+    const canvasHeight = dimensions.height
 
     useEffect(() => {
         // TODO: needs to redraw all elements each frame
@@ -42,8 +45,8 @@ function Gridlines({pixelsPerMesh}) {
   <>
       <canvas 
       ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={canvasWidth}
+      height={canvasHeight}
       className='border border-black rounded-md bg-transparent inset-0 absolute z-5'
       />
   </>

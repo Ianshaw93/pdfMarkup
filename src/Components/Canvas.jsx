@@ -3,12 +3,14 @@ import Gridlines from './Gridlines'
 
 // TODO: send in 
 // eslint-disable-next-line react/prop-types
-function Canvas({tool}) {
-    console.log(tool)
+function Canvas({tool, dimensions}) {
+    console.log(dimensions)
     const [currentPoly, setCurrentPoly] = useState([])
     const [isDrawing, setIsDrawing] = useState(false)
     const canvasRef = useRef(null)
     const pixelsPerMesh = 10
+    const canvasWidth = dimensions.width
+    const canvasHeight = dimensions.height
 
     useEffect(() => {
         // TODO: needs to redraw all elements each frame
@@ -78,11 +80,11 @@ function Canvas({tool}) {
 // TODO: move gridline canvas to own component
   return (
   <>
-    <Gridlines pixelsPerMesh={pixelsPerMesh}/>
+    <Gridlines pixelsPerMesh={pixelsPerMesh} dimensions={dimensions}/>
       <canvas 
       ref={canvasRef}
-      width={window.innerWidth}
-      height={window.innerHeight}
+      width={canvasWidth} // pass in width and height as props
+      height={canvasHeight}
       className='border border-black rounded-md bg-transparent inset-0 absolute z-10'
       onClick={handleClick}
       />

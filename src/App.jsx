@@ -1,31 +1,29 @@
 import './App.css'
 import Canvas from './Components/Canvas'
 import { useRef, useState } from 'react'
-// import { pdfjs } from "react-pdf";
-// import { getDocument, GlobalWorkerOptions } from 'pdfjs-dist/es5/build/pdf';
-// import PDFJSWorker from 'pdfjs-dist/es5/build/pdf.worker.entry';
 
 const pdfjs = await import('pdfjs-dist/build/pdf');
 const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
 
 pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-// GlobalWorkerOptions.workerSrc = PDFJSWorker;
+
 
 
 function App() {
   const [ previewImage, setPreviewImage ] = useState();
+  const [ canvasDimensions, setCanvasDimensions ] = useState({})
   const pdfCanvasRef = useRef()
 
   function handleFileChange(event) {
     const file = event.target.files[0]
     if (file && pdfCanvasRef.current) {
-      setPreviewImage(true)
+      
       const loadingTask = pdfjs.getDocument(URL.createObjectURL(file))
       loadingTask.promise.then((pdf) => {
 
         const pageNumber = 1
         pdf.getPage(pageNumber).then((page) => {
-          console.log("setting up pdf")
+          console.log("setting up pdf", pdfCanvasRef.current)
           const canvas = pdfCanvasRef.current
           const context = canvas.getContext("2d")
   
@@ -35,6 +33,7 @@ function App() {
             // Prepare canvas using PDF page dimensions
             canvas.height = viewport.height;
             canvas.width = viewport.width;
+            setCanvasDimensions({width: canvas.width, height: canvas.height})
   
             // Render PDF page into canvas context
             var renderContext = {
@@ -45,6 +44,7 @@ function App() {
             renderTask.promise.then(() => {
               console.log("Page rendered");
             });
+            setPreviewImage(true)
             
         })
       })
@@ -75,12 +75,12 @@ function App() {
         width={window.innerWidth}
         />} */}
         </div>
-        <Canvas tool={"polyline"}/>
+        <Canvas tool={"polyline"} dimensions={canvasDimensions}/>
       </>
       ) : <div> Please upload image </div>}
       <canvas 
       ref={pdfCanvasRef}
-      className='z-100'
+      className='z-1'
       />
     </div>
     </>

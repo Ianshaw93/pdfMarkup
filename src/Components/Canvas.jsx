@@ -3,6 +3,7 @@ import Gridlines from './Gridlines'
 
 // TODO: send in 
 // eslint-disable-next-line react/prop-types
+// TODO: need to consider viewport to add points etc
 function Canvas({tool, dimensions}) {
     console.log(dimensions)
     const [currentPoly, setCurrentPoly] = useState([])
@@ -69,7 +70,9 @@ function Canvas({tool, dimensions}) {
             // draw vertex
             let dimension = 10
             context.fillStyle = 'green'
-            let newP = {x: event.clientX, y: event.clientY}
+            // need to add canvas scroll left area, above area
+            console.log("event point: ", event)
+            let newP = {x: event.pageX, y: event.pageY}
             newP = snapVertexToGrid(newP)
             context.fillRect(newP.x - dimension/2, newP.y - dimension/2, dimension, dimension)  
             // add point to currentPoly

@@ -6,9 +6,11 @@ import { useRef, useState } from 'react'
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL('pdfjs-dist/build/pdf.worker.entry', import.meta.url);
 
 const pdfjs = await import('pdfjs-dist/build/pdf');
-const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
+// const pdfjsWorker = await import('pdfjs-dist/build/pdf.worker.entry');
 
-pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+// pdfjs.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+pdfjs.GlobalWorkerOptions.workerSrc = "//cdnjs.cloudflare.com/ajax/libs/pdf.js/{installed_npm_version}/pdf.worker.js"
+// pdfjs.GlobalWorkerOptions.workerSrc = null;
 
 
 
